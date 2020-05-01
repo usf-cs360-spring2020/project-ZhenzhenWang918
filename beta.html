@@ -82,7 +82,7 @@
                 <span class="icon"><i class="fas fa-chart-area"></i></span>
                 <span>ScatterMatrix</span>
               </a>
-             
+
             </div>
           </div>
         </div>
@@ -116,11 +116,95 @@
                     Prototype 2 - Total COVID-19 cases in the World.
 
                   </h1>
-                  <p> 
+                  <p>
                   </p>
                   <table><tr><td colspan="2" align="center">
 
-                    <img src="chloropleth.png" alt="prototype2" width="960" height="500">
+                    <style>
+                        .countries {
+                          fill: none;
+                          stroke: #fff;
+                          stroke-linejoin: round;
+                        }
+                        .legendThreshold {
+                            font-size: 12px;
+                            font-family: sans-serif;
+                        }
+                        .caption {
+                            fill: #000;
+                            text-anchor: start;
+                            font-weight: bold;
+                        }
+                      </style>
+                      <svg width="960" height="540"></svg>
+                      <script src="https://d3js.org/d3.v4.min.js"></script>
+                      <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+                      <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
+                      <script>
+                      // The svg
+                      var svg = d3.select("svg"),
+                          width = +svg.attr("width"),
+                          height = +svg.attr("height");
+
+                      // Map and projection
+                      var path = d3.geoPath();
+                      var projection = d3.geoNaturalEarth()
+                          .scale(1.4*width / 2 / Math.PI)
+                          .translate([width / 2, height / 2])
+                      var path = d3.geoPath()
+                          .projection(projection);
+
+                      // Data and color scale
+                      var data = d3.map();
+                      var colorScheme = d3.schemeReds[6];
+                      colorScheme.unshift("#eee")
+                      var colorScale = d3.scaleThreshold()
+                          .domain([1, 6, 11, 26, 101, 1001])
+                          .range(colorScheme);
+
+                      // Load external data and boot
+                      d3.queue()
+                          .defer(d3.json, "world-110m.geojson")
+                          .defer(d3.csv, "mooc-countries.csv", function(d) { data.set(d.code, +d.total); })
+                          .await(ready);
+
+                        function ready(error, topo) {
+                            if (error) throw error;
+
+                            // Draw the map
+                            svg.append("g")
+                                .attr("class", "countries")
+                                .selectAll("path")
+                                .data(topo.features)
+                                .enter().append("path")
+                                .attr("fill", function (d) {
+                                    // Pull data for this country
+                                    d.total = data.get(d.id) || 0;
+                                    // Set the color
+                                    return colorScale(d.total);
+                                })
+                                .attr("d", path);
+
+                            var bars = svg.selectAll("g").selectAll("path");
+                            bars.on("mouseenter", function (d) {
+                                bars.filter(e => (d.id !== e.id))
+                                    .transition()
+                                    .style("fill-opacity", "0.4")
+                                // bars.filter(e => (d.id == e.id))
+                                //     .transition()
+                                //     .style("stroke", "red")
+                            });
+
+                            bars.on("mouseout", function (d) {
+                                bars.transition()
+                                    .style("fill-opacity", "1")
+                                    .style("stroke", "white");
+                            });
+                        }
+
+
+                      </script>
                   </td></tr><tr><td align="center">
 New cases per day, per million people (3-day rolling average)<br/>
                     <img src="time.png" alt="prototype2" width="600" height="250">
@@ -157,7 +241,7 @@ New cases per day, per million people (3-day rolling average)<br/>
           <p>Some countries show they had second wave of cases, which means we should be err on the side of caution when reopening. It will also be interesting based on the next month's data to see if allowing back some activities is safe.</p>
 
         <h4>Encoding</h4>
-          <p>I choose to use a map, which is the obvious way to show people how bad it is right now. Many maps of the pandemic have been made, but I want to incorporate the best features from each and add some of my own to tell the most accurate story possible.
+          <p>I chose to use a map, which is the obvious way to show people how bad it is right now. Many maps of the pandemic have been made, but I want to incorporate the best features from each and add some of my own to tell the most accurate story possible.
           <p>Specifically, my map will:</p>
           <ul>
             <li>As a choropleth map, display each country's confirmed cases and deaths shaded on a log scale</li>
@@ -167,7 +251,7 @@ New cases per day, per million people (3-day rolling average)<br/>
                 <li>Hue = percentage <i>daily</i> growth</li>
               </ul></li>
             <li>If possible, resize the countries so that their area is proportional to population. Combined with the above features, this will allow the true scale to be shown while keeping having each country easy to identify by its shape.</li>
-            
+
           </ul>
             <p>Together with the map, there will be a semi-log graph of daily cases vs time, and a log-log plot of daily cases vs total cases which is useful for seeing when a country has exited the exponential growth phase. As with the map, the values on these graphs will be per capita. The next section will detail how they all interact with one another.</p>
 
