@@ -92,29 +92,22 @@
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"
                     integrity="sha256-qo76Vs9B6JAALbrTn+PcN1r09hbNLd2M78V19glOMeU=" crossorigin="anonymous"></script>
 
-                <h4>Question</h4>
-                <ul style="list-style-type:circle">
-                    <li><b>Are we winning the war against COVID-19?</b></li>
-                    <li><b>Which countries have been most effective at bringing COVID-19 under control?</b></li>
-                    <li><b>When can we start to relax social distincing restrictions?</b></li>
+               
+
+                <h4>FeedBack </h4>
+               <ul style=“list-style-type:circle”>
+               <li><b>Feedback from peer</b></li>
+               <li>The basemap of World is centered and is a reasonable size. The thickness of country wise boundary is good.
+                The size of the symbols is a little big and they overlap too much. I would suggest to use a bubble to show the intensity of incidents per country.</li>
+               <li>Details given about the coronavirus cases are helpful to understand . But the cases given are only per country rather than per location.</li>
+               <li>Only one color is used to show the coronavirus cases.</li>
+               <li>There's a good amount of data on the map but compared to the size of the svg, I wouldn't say that the data density is very high. The water of the map takes up half of the space.</li>
+              <li><b>feedback from insturctor</b></li>
+              <li>Maybe make map size smaller since the interactivity is main part that will showing my topic</li>
+              <li><b>Changes that I have made</b></li>
                 </ul>
-                <p>I want to show the situation on a world map so that anyone can get an intuition for where we
-                    stand.</p>
 
-                <h4>Answer</h4>
-                <p>As of April 2020, the total number COVID-19 cases worldwide is still increasing very fast. In
-                    some of the worst-hit places the number of daily infections has peaked, while other countries
-                    that avoided the first waves are just beginning to tick up.</p>
-
-                <p>A few areas such as Taiwan have done especially well at controlling the spread throughout the
-                    whole crisis. Some, like Singapore, kept numbers under control initially but had an outbreak
-                    later that forced it into a more aggressive lockdown. Others, like South Korea, saw one of the
-                    earliest major outbreaks (outside China) but have successfully controlled it since then.</p>
-
-                <p>Some countries show they had second wave of cases, which means we should be err on the side of
-                    caution when reopening. It will also be interesting based on the next month's data to see if
-                    allowing back some activities is safe.</p>
-
+               
                 <h4>Encoding</h4>
                 <p>I chose to use a map, which is the obvious way to show people how bad it is right now. Many maps
                     of the pandemic have been made, but I want to incorporate the best features from each and add
@@ -156,6 +149,24 @@
                         <li>All data points in both graphs that are after this time point are faded</li>
                     </ul>
                     Finally, have a global toggle to switch between number of cases and number of deaths.
+                    <p></p>
+
+                    <h4>Findings</h4>
+                    <p>When a user hovers over a country or the plot for that country:</p>
+                    <ul>
+                        <li>Shows the total number of cases, deaths and country's name in a tooltip</li>
+                        <li>Highlights the country on the map by drawing a boundry around its shape</li>
+                        <li>Highlights the plot for that country in the graphs below.(think of it)</li>
+                    </ul>
+
+                    <p>When a user clicks on a point in the time-based graph:</p>
+                    <ul>
+                        <li>The map is set to reflect the situation on that particular day</li>
+                        <li>All data points in both graphs that are after this time point are faded</li>
+                    </ul>
+                    Finally, have a global toggle to switch between number of cases and number of deaths.
+
+                    
             </div>
 
             <!-- End page content -->
