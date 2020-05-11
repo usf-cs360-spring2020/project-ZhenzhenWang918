@@ -20,6 +20,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
+
 <body>
 
     <!-- Page header -->
@@ -51,134 +52,110 @@
             <!-- Begin page content -->
             <div class="content">
                 <h1 id="home" class="title">
-                    <h1 id="home" class="title">
-                        <!-- TODO: Change page title -->
-                        Total COVID-19 cases in the World.
+                    <!-- TODO: Change page title -->
+                    <div style="text-align:center">Worldwide Incidence of COVID-19</div>
+                </h1>
+                <style>
+                    .countries {
+                        fill: none;
+                        stroke: #fff;
+                        stroke-linejoin: round;
+                    }
 
-                    </h1>
-                    <p>
-                    </p>
-                    <table>
-                        <tr>
-                            <td colspan="2" align="center">
+                    .legendThreshold {
+                        font-size: 12px;
+                        font-family: sans-serif;
+                    }
 
-                                <style>
-                                    .countries {
-                                        fill: none;
-                                        stroke: #fff;
-                                        stroke-linejoin: round;
-                                    }
+                    .caption {
+                        fill: #000;
+                        text-anchor: start;
+                        font-weight: bold;
+                    }
+                </style>
+                <svg width="1344" height="756" style="border:1px solid #ddd"></svg>
+                <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+                <script src="https://d3js.org/d3.v5.min.js"></script>
+                <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+                <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+                <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
+                <script src="vis.js"></script>
 
-                                    .legendThreshold {
-                                        font-size: 12px;
-                                        font-family: sans-serif;
-                                    }
 
-                                    .caption {
-                                        fill: #000;
-                                        text-anchor: start;
-                                        font-weight: bold;
-                                    }
-                                </style>
-                                <svg width="960" height="540"></svg>
-                                <script src="https://d3js.org/d3.v4.min.js"></script>
-                                <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-                                <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-                                <script
-                                    src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
-                                <script src="vis.js"></script>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center">
-                                New cases per day, per million people (3-day rolling average)<br />
-                                <img src="time.png" alt="prototype2" width="600" height="250">
-                            </td>
-                            <td align="center">
+                <!-- include d3.js v5 -->
 
-                                <img src="traj.png" alt="prototype2" width="600" height="250">
-                            </td>
-                        </tr>
-                    </table>
-                    <!-- <img src="map.png" alt="prototype2" width="960" height="500"> -->
+                <!-- include d3.js modules -->
+                <script src="https://d3js.org/d3-array.v2.min.js"></script>
 
-                    <!-- include d3.js v5 -->
-                    <script src="https://d3js.org/d3.v5.min.js"></script>
+                <!-- include d3-legend: https://d3-legend.susielu.com/ -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"
+                    integrity="sha256-qo76Vs9B6JAALbrTn+PcN1r09hbNLd2M78V19glOMeU=" crossorigin="anonymous"></script>
 
-                    <!-- include d3.js modules -->
-                    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+                <h4>Question</h4>
+                <ul style="list-style-type:circle">
+                    <li><b>Are we winning the war against COVID-19?</b></li>
+                    <li><b>Which countries have been most effective at bringing COVID-19 under control?</b></li>
+                    <li><b>When can we start to relax social distincing restrictions?</b></li>
+                </ul>
+                <p>I want to show the situation on a world map so that anyone can get an intuition for where we
+                    stand.</p>
 
-                    <!-- include d3-legend: https://d3-legend.susielu.com/ -->
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"
-                        integrity="sha256-qo76Vs9B6JAALbrTn+PcN1r09hbNLd2M78V19glOMeU="
-                        crossorigin="anonymous"></script>
+                <h4>Answer</h4>
+                <p>As of April 2020, the total number COVID-19 cases worldwide is still increasing very fast. In
+                    some of the worst-hit places the number of daily infections has peaked, while other countries
+                    that avoided the first waves are just beginning to tick up.</p>
 
-                    <script src="bubbleplot/bubble.js"></script>
+                <p>A few areas such as Taiwan have done especially well at controlling the spread throughout the
+                    whole crisis. Some, like Singapore, kept numbers under control initially but had an outbreak
+                    later that forced it into a more aggressive lockdown. Others, like South Korea, saw one of the
+                    earliest major outbreaks (outside China) but have successfully controlled it since then.</p>
 
-                    <h4>Question</h4>
-                    <ul style="list-style-type:circle">
-                        <li><b>Are we winning the war against COVID-19?</b></li>
-                        <li><b>Which countries have been most effective at bringing COVID-19 under control?</b></li>
-                        <li><b>When can we start to relax social distincing restrictions?</b></li>
+                <p>Some countries show they had second wave of cases, which means we should be err on the side of
+                    caution when reopening. It will also be interesting based on the next month's data to see if
+                    allowing back some activities is safe.</p>
+
+                <h4>Encoding</h4>
+                <p>I chose to use a map, which is the obvious way to show people how bad it is right now. Many maps
+                    of the pandemic have been made, but I want to incorporate the best features from each and add
+                    some of my own to tell the most accurate story possible.
+                    <p>Specifically, my map will:</p>
+                    <ul>
+                        <li>Be choropleth map, it displays each country's confirmed cases and deaths shaded on a log
+                            scale</li>
+                        <li>The color will change based on rates per capita</li>
+
+                        <li>Encode two dimensions in color:<ul>
+                                <li>Intensity = <i>total</i> cases (or deaths) so far</li>
+                                <li>Hue = percentage <i>daily</i> growth</li>
+                            </ul>
+                        </li>
+
+                        <li>If possible, resize the countries so that their area is proportional to population.
+                            Combined with the above features, this will allow the true scale to be shown while
+                            keeping having each country easy to identify by its shape.</li>
+
                     </ul>
-                    <p>I want to show the situation on a world map so that anyone can get an intuition for where we
-                        stand.</p>
 
-                    <h4>Answer</h4>
-                    <p>As of April 2020, the total number COVID-19 cases worldwide is still increasing very fast. In
-                        some of the worst-hit places the number of daily infections has peaked, while other countries
-                        that avoided the first waves are just beginning to tick up.</p>
+                    <p>Together with the map, there will be a semi-log graph of daily cases vs time, and a log-log
+                        plot of daily cases vs total cases which is useful for seeing when a country has exited the
+                        exponential growth phase. As with the map, the values on these graphs will be per capita.
+                        The next section will detail how they all interact with one another.</p>
 
-                    <p>A few areas such as Taiwan have done especially well at controlling the spread throughout the
-                        whole crisis. Some, like Singapore, kept numbers under control initially but had an outbreak
-                        later that forced it into a more aggressive lockdown. Others, like South Korea, saw one of the
-                        earliest major outbreaks (outside China) but have successfully controlled it since then.</p>
+                    <h4>Interactivity</h4>
+                    <p>When a user hovers over a country or the plot for that country:</p>
+                    <ul>
+                        <li>Shows the total number of cases, deaths and country's name in a tooltip</li>
+                        <li>Highlights the country on the map by drawing a boundry around its shape</li>
+                        <li>Highlights the plot for that country in the graphs below.(think of it)</li>
+                    </ul>
 
-                    <p>Some countries show they had second wave of cases, which means we should be err on the side of
-                        caution when reopening. It will also be interesting based on the next month's data to see if
-                        allowing back some activities is safe.</p>
-
-                    <h4>Encoding</h4>
-                    <p>I chose to use a map, which is the obvious way to show people how bad it is right now. Many maps
-                        of the pandemic have been made, but I want to incorporate the best features from each and add
-                        some of my own to tell the most accurate story possible.
-                        <p>Specifically, my map will:</p>
-                        <ul>
-                            <li>Be choropleth map, it displays each country's confirmed cases and deaths shaded on a log
-                                scale</li>
-                            <li>The color will change based on rates per capita</li>
-
-                            <li>Encode two dimensions in color:<ul>
-                                    <li>Intensity = <i>total</i> cases (or deaths) so far</li>
-                                    <li>Hue = percentage <i>daily</i> growth</li>
-                                </ul>
-                            </li>
-
-                            <li>If possible, resize the countries so that their area is proportional to population.
-                                Combined with the above features, this will allow the true scale to be shown while
-                                keeping having each country easy to identify by its shape.</li>
-
-                        </ul>
-
-                        <p>Together with the map, there will be a semi-log graph of daily cases vs time, and a log-log
-                            plot of daily cases vs total cases which is useful for seeing when a country has exited the
-                            exponential growth phase. As with the map, the values on these graphs will be per capita.
-                            The next section will detail how they all interact with one another.</p>
-
-                        <h4>Interactivity</h4>
-                        <p>When a user hovers over a country or the plot for that country:</p>
-                        <ul>
-                            <li>Shows the total number of cases, deaths and country's name in a tooltip</li>
-                            <li>Highlights the country on the map by drawing a boundry around its shape</li>
-                            <li>Highlights the plot for that country in the graphs below.(think of it)</li>
-                        </ul>
-
-                        <p>When a user clicks on a point in the time-based graph:</p>
-                        <ul>
-                            <li>The map is set to reflect the situation on that particular day</li>
-                            <li>All data points in both graphs that are after this time point are faded</li>
-                        </ul>
-                        Finally, have a global toggle to switch between number of cases and number of deaths.
+                    <p>When a user clicks on a point in the time-based graph:</p>
+                    <ul>
+                        <li>The map is set to reflect the situation on that particular day</li>
+                        <li>All data points in both graphs that are after this time point are faded</li>
+                    </ul>
+                    Finally, have a global toggle to switch between number of cases and number of deaths.
             </div>
 
             <!-- End page content -->
