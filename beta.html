@@ -127,19 +127,30 @@
                                 .attr("d", path);
 
                             var bars = svg.selectAll("g").selectAll("path");
+
+                            const tip = d3.select("body").append("div").attr("id", "tooltip");
+                            tip.style("padding", "9px")
+                                .style("background", "#fff")
+                                .style("border", "3px solid #999")
+                                .style("border-radius", "10px")
+                                .style("visibility", "hidden")
+                                .style("position", "absolute");
                             bars.on("mouseenter", function (d) {
                                 bars.filter(e => (d.id !== e.id))
                                     .transition()
-                                    .style("fill-opacity", "0.4")
-                                // bars.filter(e => (d.id == e.id))
-                                //     .transition()
-                                //     .style("stroke", "red")
+                                    .style("fill-opacity", "0.4");
+                                tip.style("visibility", "visible")
+                                    .style("left", (d3.event.pageX + 10) + "px")
+                                    .style("top", (d3.event.pageY - 10) + "px")
+                                tip.html("<b>Country</b><br />###,### cases<br />##.### per million");
                             });
 
                             bars.on("mouseout", function (d) {
                                 bars.transition()
                                     .style("fill-opacity", "1")
                                     .style("stroke", "white");
+
+                                tip.style("visibility", "hidden");
                             });
                         }
 
