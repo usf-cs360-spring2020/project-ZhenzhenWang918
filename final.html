@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="prototype3styles.css">
 
    <!-- TODO: Change title -->
     <title>Final Project</title>
@@ -12,6 +11,9 @@
     <!-- Load Bulma from CDN (consider saving it to repository instead) -->
     <!-- https://bulma.io/ -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
+    <!-- TODO: include stylesheets -->
+    <link href="bubbleplot/style.css" rel="stylesheet" type="text/css">
 
     <!-- Load Font Awesome 5 (free) icons -->
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
@@ -26,7 +28,7 @@
       <div class="hero-body">
         <div class="container">
           <!-- TODO: Change title -->
-          <h1 class="title">Fianl Project</h1>
+          <h1 class="title">Final Project</h1>
           <!-- TODO: Change subtitle -->
           <h2 class="subtitle">Visualization for Covid-19</h2>
         </div>
@@ -34,255 +36,216 @@
     </section>
     <!-- End page header -->
 
-     <!--Navigation bar-->
-     <div id="nav-placeholder">
-    </div>
-      <script>
-      $(function(){
-        $("#nav-placeholder").load("nav.html");
-      });
-      </script>
-   <!--end of Navigation bar-->
+      <!--Navigation bar-->
+  <div id="nav-placeholder">
+  </div>
+    <script>
+    $(function(){
+      $("#nav-placeholder").load("nav.html");
+    });
+    </script>
+ <!--end of Navigation bar-->
 
     <section class="section">
       <div class="container">
         <!-- Begin page content -->
         <div class="content">
-          <h2 id="home" class="title">
-            <!-- TODO: Change page title -->
-            COVID-19 - HeatMap
-          </h2>
+            <h1 id="home" class="title">
+                <h1 id="home" class="title">
+                    <!-- TODO: Change page title -->
+                    Total COVID-19 cases in the World.
 
-          <h5>Zhenzhen Wang</h5>
-          <br>
+                  </h1>
+                  <p>
+                  </p>
+                  <table><tr><td colspan="2" align="center">
 
-          <!--
+                    <style>
+                        .countries {
+                          fill: none;
+                          stroke: #fff;
+                          stroke-linejoin: round;
+                        }
+                        .legendThreshold {
+                            font-size: 12px;
+                            font-family: sans-serif;
+                        }
+                        .caption {
+                            fill: #000;
+                            text-anchor: start;
+                            font-weight: bold;
+                        }
+                      </style>
+                      <svg width="960" height="540"></svg>
+                      <script src="https://d3js.org/d3.v4.min.js"></script>
+                      <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+                      <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+                      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
+                      <script>
+                      // The svg
+                      var svg = d3.select("svg"),
+                          width = +svg.attr("width"),
+                          height = +svg.attr("height");
 
-          <h4>Wrangling specific to prototype</h4>
-          <p></p>
-          
+                      // Map and projection
+                      var path = d3.geoPath();
+                      var projection = d3.geoNaturalEarth()
+                          .scale(1.4*width / 2 / Math.PI)
+                          .translate([width / 2, height / 2])
+                      var path = d3.geoPath()
+                          .projection(projection);
 
-            <pre style="font-size: 14px; font-family: Dank Mono Regular;">
-    Pie Chart:
+                      // Data and color scale
+                    //   var data = d3.map();
+                      var topo;
+                      var countries;
+                      var date=0;
 
-    Filtered By: Year 2019, Neighborhood not null and Call Type Group not null
-    Grouping By: Neighborhood, Call type (implementation only)
-    Aggregated By: Response time (Avg)
-                   Incident Number (Sum)               
-    
-    Heatmap:
+                      const tip = d3.select("body").append("div").attr("id", "tooltip");
 
-    Filtered By:   Year 2019, Neighbourhood not null, Call Type Group not null, 
-                  Batallion is "B02", and Station is "36"
-    Grouping By:   Neighbourhood, and Watch Date
-    Aggregated By: Response time (Avg)
-                  Incident Number (Sum)
-            </pre>
+                      tip.style("padding", "9px")
+                                .style("background", "#fff")
+                                .style("border", "3px solid #999")
+                                .style("border-radius", "10px")
+                                .style("visibility", "hidden")
+                                .style("position", "absolute");
 
-          <h4>Tableau Prototype</h4>
+                                
+                      var colorScheme = d3.schemeReds[6];
+                      colorScheme.unshift("#eee")
+                      var colorScale = d3.scaleThreshold()
+                          .domain([1, 6, 11, 26, 101, 1001])
+                          .range(colorScheme);
 
-          <img src="midterm_prototype_3.png" alt="prototype3a" width="960">
-          <img src="midterm-prototype-3b.png" alt="prototype3b" width="960">
-          <br>
+                      // Load external data and boot
+                      d3.queue()
+                          .defer(d3.json, "worldmap2.geojson")
+                          .defer(d3.json, "wrangled.json")
+                          .await(ready);
 
-          <h4>Conclusion based on the prototype</h4>
-          <p>
-            The pie chart prototype shows number of incidents in different neighborhoods of San Fcxrancisco,
-            and the response time from fire stations for citizens having different emergency calls.
-            From the prototype above, we can see that the Tenderloin, South of Market and Mission  are the 
-            neighborhoods having the most number of incidents with all having the good response time (below 10 minutes). 
-            It also shows that the fire station response time for the average case is around 10 minutes. 
-            The neighbourhood with most number of incidents is Tendelorian (45,491 cases) with an average 
-            response time of 8.8 min.
-          </p>
-          <p> 
-            The heatmap prototype shows average response time per month of 
-            Station "36" for each Neighbourhood which lies under batallion 
-            "B02". From the prototype above, we can say that; the response 
-            time for the Financial District in the month of January is above
-             the average response time. This is also the case for Potrero 
-             Hill for the month of April, May, June, July, September and 
-             October. The neighbourhood of Inner Richmond, South of Market,
-              Hayes Valley, Tenderloin, and Western Addition all have 
-              response time below the average response time.
-          </p>
-          <br>
+                        function ready(error, t, c) {
+                            topo = t;
+                            countries = c;
+                            // Draw the map
+                        
+                            svg.append("g")
+                                .attr("class", "countries")
+                                .selectAll("path")
+                                .data(topo.features)
+                                .enter().append("path")
+                                .attr("d", path);
 
-          <h4>Feedback From Peer Review </h4>
-          <p>
-            <table>
-              <thead>
-                  <tr>
-                      <th>Ratings</th>
-                      <th>Score</th>
-                
-                  </tr>
-              </thead>
-              <tbody>
-  
-                  <tr>
-                      <td>
-                        Rate the non-color encodings on a scale of 5 (appropriate for data type, strong visual channels) to 1 (inappropriate for data type, weak visual channels).
-                        </td>
-                      <td> <font color="green">4.3</font></td>
-                      
-                  </tr>
-  
-                  <tr>
-                      <td>
-                        Rate the lie factor (including misleading context, weak visual encodings, or exaggerated encodings) on a scale of 5 (low lie factor) to 1 (high lie factor).
-                        </td>
-                        <td> <font color="green">4.3</font></td>
-                     
-                  </tr>
-              </tbody>
-          </table>
-  
-          <table>
-            <thead>
-                <tr>
-                    <th>comments</th>
-                </tr>
-            </thead>
-            <tbody>
+                            redraw();
+                        }
+                        function redraw() {
+                            var bars = svg.selectAll("g").selectAll("path");
 
-                <tr>
-                    <td><font color="green">The color scheme should not be diverging because the data it is encoding does not have negative values.</font> I like how the heat map shows some months where the response time is worse than most others and makes that discrepancy clear.
-                      <font color="green">It is also hard to tell which label in the pie chart refers to which slice of the pie.</font></td>
-                  
-                </tr>
+                            bars.attr("fill", function (d) {
+                                    // Pull data for this country
+                                    // console.log(d.id);
+                                    // console.log(countries[d.id]);
+                                    d.total = d.id in countries ? Math.sqrt(countries[d.id]["Cases"][date]) : 0;
+                                    // Set the color
+                                    return colorScale(d.total);
+                                })
 
-                <tr>
-                    <td>
-                      The number of incidents also can be reliant on population for the neighborhood
-                       that the battalion serves, so maybe a ratio would be better for lie factor
-                        rather than raw count. <font color="green">The labeling for 
-                          the pie chart is a bit difficult to parse for some of the 
-                          smaller slices, if that is changed during interactivity to show 
-                          details as the user hovers over a slice it would help with 
-                          interpretation.</font> Otherwise, the two charts seem good together,
-                           and the interactivity seems like it will provide good information.
-                      
-                    </td>
-                </tr>
+                            bars.on("mouseenter", function (d) {
+                                c = countries[d.id];
+                                cases = countries[d.id]["Cases"][date];
+                                deaths = countries[d.id]["Deaths"][date];
 
-            </tbody>
-            <table>
-              <thead>
-                  <tr>
-                      <th>Changes I made</th>
-                  </tr>
-              </thead>
-              <tbody>
-  
-                  <tr>
-                      <td>The scores I got from feedback are pretty good except color encoding.
-                         After reading Feedback comments from Classmates, 
-                         I think it is unnessary for me to have pie char. But 
-                         Classmates like my heapmap a lot. Because it does not just look nice but also connect with my 
-                         another two parters' analysing. I changed the color of the heatmap.
+                                bars.filter(e => (d.id !== e.id))
+                                    .transition()
+                                    .style("fill-opacity", "0.4");
+                                tip.style("visibility", "visible")
+                                    .style("left", (d3.event.pageX + 10) + "px")
+                                    .style("top", (d3.event.pageY - 10) + "px")
+                                tip.html("<b>" + c.name + "</b><br />" + cases + " cases<br />" + deaths + " deaths<br />##.### per million");
+                            });
+                            svg.on("click", function (d) {
+                                date = Math.floor(d3.event.pageX/7); redraw();
+                            });
 
-                      </td>
-                    
-                  </tr>
-  
-               
-  
-              </tbody>
-        </table>
+                            bars.on("mouseout", function (d) {
+                                bars.transition()
+                                    .style("fill-opacity", "1")
+                                    .style("stroke", "white");
 
-        <hr>
-        <h4>New Tableau Prototype After Feedback</h4>
-
-      
-          <img src="HeatMap.png" alt="prototype3b" width="960">
-
-            
-          </p>
-          <h4>Data encoding</h4>
-          <p>
-            Average of Time to Arrival is broken down by Watch Date Month vs.
-             Neighborhoods - Analysis Boundaries.  Color shows average of Time to Arrival. 
-              The marks are labeled by average of Time to Arrival. The data is filtered on Call
-               Type Group, Exclusions (On Scene DtTm,Received DtTm), Station Area and Watch Date 
-               Year. The Call Type Group filter keeps Alarm, Fire, Non Life-threatening and 
-               Potentially Life-Threatening. The Exclusions (On Scene DtTm,Received DtTm) filter 
-               keeps 300,288 members. The Station Area filter keeps 36. The Watch Date Year filter
-                keeps 2019.            
-          </p>
-          <p>
-              Only neighborhoods that had at least one incident every month from station 36 are included.
-          </p>  
-          <h4>How to Interact with This Visualization?</h4>
-          <p>
-            Mouse over the heat map or bar chart to see details for a particular cell.
-          </p>  
-          <p>
-            Clicking a cell in the heat map applies that filter to the bar chart. Click again to reset to all data points.
-            <li>For example, When You clike a cell between <font color="green">Mission and January</font>. There will be three changes.</li>
-           
-            <ol>
-              <li> <font color="green">Mission row and January column</font> change to the same color.</li>
-              <li> The Bar chart's title will change to Average Response Time <font color="green">  in Mission</font> in January 2019, which is corresponding to the cell you clicked.</li>
-              <li> The Bar chart's 4 columns will change to the different <font color="green">heights </font> deponding on Mission and January</li>
-             
-          </ol>
-          
-          </p>
-          <p>
-            Clicking a bar in the bar chart applies that filter to the heat map. Click again to reset to all data points.
-            <li> For example, when You clike bar chart's single columm <font color="green">Non Life-threatening</font>, there will be two changes:</li>
-            <ol>
-              <li> The Heatmap's title will change to Average Response Time for <font color="green">Non Life-threatening calls in 2019</font></li>
-              <li> The heatmap will only show the average response time for <font color="green">Non Life-threatening</font></li>
-             
-          </ol>
-          
-          </p>
-        </p>  
+                                tip.style("visibility", "hidden");
+                            });
+                        }
 
 
-          <h4>D3 Implementation</h4>
+                      </script>
+                  </td></tr><tr><td align="center">
+New cases per day, per million people (3-day rolling average)<br/>
+                    <img src="time.png" alt="prototype2" width="600" height="250">
+                  </td><td align="center">
 
-          -->
+                    <img src="traj.png" alt="prototype2" width="600" height="250">
+                  </td></tr></table>
+                  <!-- <img src="map.png" alt="prototype2" width="960" height="500"> -->
 
-          <!-- Load d3.js -->
-          <script src="https://d3js.org/d3.v5.js"></script>
-          <div id="prototype3"></div>
-          <script src="javascript/prototype3.js"></script>
-<!--
-       
-        <h4>Findings Learned from This Visualization</h4>
-        <p>
-          <ul>
-            <li>Tenderloin, the neighborhood with the most number of incidents, has an average response time of 8.5 minutes.</li>
-            <li>Non-life threatening calls take longer to respond to than other types of calls,
-               which makes sense because they have lower priority.</li>
-            <li>For this station, calls from the Mission neighborhood take the longest to respond
-               to on average, and this is consistent across all months of the year. Perhaps the
-                department should investigate ways to improve the response time here.</li>
+        <!-- include d3.js v5 -->
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+
+        <!-- include d3.js modules -->
+        <script src="https://d3js.org/d3-array.v2.min.js"></script>
+
+        <!-- include d3-legend: https://d3-legend.susielu.com/ -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha256-qo76Vs9B6JAALbrTn+PcN1r09hbNLd2M78V19glOMeU=" crossorigin="anonymous"></script>
+
+        <script src="bubbleplot/bubble.js"></script>
+
+        <h4>Question</h4>
+        <ul style="list-style-type:circle">
+        <li><b>Are we winning the war against COVID-19?</b></li>
+        <li><b>Which countries have been most effective at bringing COVID-19 under control?</b></li>
+          <li><b>When can we start to relax social distincing restrictions?</b></li>
           </ul>
-        </p>  
+          <p>I want to show the situation on a world map so that anyone can get an intuition for where we stand.</p>
+
+        <h4>Answer</h4>
+          <p>As of April 2020, the total number COVID-19 cases worldwide is still increasing very fast. In some of the worst-hit places the number of daily infections has peaked, while other countries that avoided the first waves are just beginning to tick up.</p>
+
+          <p>A few areas such as Taiwan have done especially well at controlling the spread throughout the whole crisis. Some, like Singapore, kept numbers under control initially but had an outbreak later that forced it into a more aggressive lockdown. Others, like South Korea, saw one of the earliest major outbreaks (outside China) but have successfully controlled it since then.</p>
+
+          <p>Some countries show they had second wave of cases, which means we should be err on the side of caution when reopening. It will also be interesting based on the next month's data to see if allowing back some activities is safe.</p>
+
+        <h4>Encoding</h4>
+          <p>I chose to use a map, which is the obvious way to show people how bad it is right now. Many maps of the pandemic have been made, but I want to incorporate the best features from each and add some of my own to tell the most accurate story possible.
+          <p>Specifically, my map will:</p>
+          <ul>
+            <li>Be choropleth map, it displays each country's confirmed cases and deaths shaded on a log scale</li>
+            <li>The color will change based on rates per capita</li>
+            
+            <li>Encode two dimensions in color:<ul>
+                <li>Intensity = <i>total</i> cases (or deaths) so far</li>
+                <li>Hue = percentage <i>daily</i> growth</li>
+              </ul></li>
+
+            <li>If possible, resize the countries so that their area is proportional to population. Combined with the above features, this will allow the true scale to be shown while keeping having each country easy to identify by its shape.</li>
+            
+          </ul>
+          
+            <p>Together with the map, there will be a semi-log graph of daily cases vs time, and a log-log plot of daily cases vs total cases which is useful for seeing when a country has exited the exponential growth phase. As with the map, the values on these graphs will be per capita. The next section will detail how they all interact with one another.</p>
+            
+        <h4>Interactivity</h4>
+        <p>When a user hovers over a country or the plot for that country:</p>
+        <ul>
+          <li>Shows the total number of cases, deaths and country's name in a tooltip</li>
+          <li>Highlights the country on the map by drawing a boundry around its shape</li>
+          <li>Highlights the plot for that country in the graphs below.(think of it)</li>
+        </ul>
         
-        
-          <h4>How this visualization supports the theme?</h4>
-          <p>
-            Visualizations helps in analysing the number of incidents in different neighbourhoods of San Francisco, and we can see here for a particular station (36) both the caseload and response times per neighborhood.
-          </p>
-
-          <h4
-          >Inspirations</h4>
-          <p>
-            <ul>
-                <li><a href="https://www.d3-graph-gallery.com/graph/heatmap_basic.html">Most basic heatmap in d3.js</a></li>
-                <li><a href="https://observablehq.com/@sjengle/interactivity">Interactivity (by Sophie Engle)</a></li>
-            </ul>
-          </p>  
-
-
-
+        <p>When a user clicks on a point in the time-based graph:</p>
+        <ul>
+          <li>The map is set to reflect the situation on that particular day</li>
+          <li>All data points in both graphs that are after this time point are faded</li>
+        </ul>
+        Finally, have a global toggle to switch between number of cases and number of deaths.
         </div>
-        -->
+      
       <!-- End page content -->
     </div>
   </section>
