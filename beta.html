@@ -23,28 +23,14 @@
   <body>
 
     <!-- Page header -->
-    <!-- https://bulma.io/documentation/layout/hero/ -->
-    <section class="hero is-primary is-bold">
-      <div class="hero-body">
-        <div class="container">
-          <!-- TODO: Change title -->
-          <h1 class="title">Final Project</h1>
-          <!-- TODO: Change subtitle -->
-          <h2 class="subtitle">Visualization for Covid-19</h2>
-        </div>
-      </div>
-    </section>
+    <div id="nav-placeholder">
+    </div>
+      <script>
+      $(function(){
+        $("#nav-placeholder").load("nav.html");
+      });
+      </script>
     <!-- End page header -->
-
-      <!--Navigation bar-->
-  <div id="nav-placeholder">
-  </div>
-    <script>
-    $(function(){
-      $("#nav-placeholder").load("nav.html");
-    });
-    </script>
- <!--end of Navigation bar-->
 
     <section class="section">
       <div class="container">
