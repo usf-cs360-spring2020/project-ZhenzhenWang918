@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
 
-   <!-- TODO: Change title -->
+    <!-- TODO: Change title -->
     <title>Final Project</title>
 
     <!-- Load Bulma from CDN (consider saving it to repository instead) -->
@@ -15,71 +16,85 @@
     <!-- Load Font Awesome 5 (free) icons -->
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
 
     <!-- Page header -->
     <div id="nav-placeholder">
     </div>
-      <script>
-      $(function(){
-        $("#nav-placeholder").load("nav.html");
-      });
-      </script>
-    <!-- End page header -->
- <section><div>
-    </div>
-  </section>
-
-  <!-- Page footer -->
-  <!-- https://bulma.io/documentation/layout/footer/ -->
-  <footer class="footer">
-    <div class="content has-text-centered is-size-7" >
-      <p>
-        <a href="#top">
-          <span class="fas fa-arrow-up"></span>
-          <span class="has-text-weight-medium">Back to Top</span>
-        </a>
-      </p>
-
-      <p>
-        <!-- TODO: Change to link to your Github repository -->
-        <a href="https://github.com/usf-cs360-spring2020/midterm-dataviz" target="_blank" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
-          <i class="fab fa-github-alt"></i>&nbsp;<strong>Github</strong>
-        </a>
-
-        <a href="https://fontawesome.com/" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
-          <i class="fab fa-font-awesome"></i>&nbsp;<strong>FontAwesome</strong>
-        </a>
-
-        <a href="https://bulma.io" class="button is-small">
-          <img src="https://bulma.io/images/made-with-bulma--semiblack.png" alt="Made with Bulma" width="128" height="24">
-        </a>
-      </p>
-    </div>
-  </footer>
-  <!-- End page footer -->
-
-  <!-- Mobile menu responsiveness -->
-  <!-- https://bulma.io/documentation/components/navbar/ -->
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-    if ($navbarBurgers.length > 0) {
-      $navbarBurgers.forEach( el => {
-        el.addEventListener('click', () => {
-          const target = el.dataset.target;
-          const $target = document.getElementById(target);
-          el.classList.toggle('is-active');
-          $target.classList.toggle('is-active');
+    <script>
+        $(function () {
+            $("#nav-placeholder").load("nav.html");
         });
-      });
-    }
-  });
-  </script>
-  <!-- End mobile menu responsiveness -->
-  </body>
+    </script>
+    <!-- End page header -->
+    <section class="section">
+        <div class="container">
+            <div class="content">
+                <h4>Acknowledgements</h4>
+                <p>I would like to acknowledge the following resources and inspirations:</p>
+                <ul>
+                    <li>Dataset from <a href="https://www.tableau.com/covid-19-coronavirus-data-resources" target="_blank">Tableau COVID-19 Data Hub</a>, described in more detail in the <a href="data.html">Dataset</a> page.</li>
+                    <li>World map GeoJSON shapes from: <a href="https://gist.github.com/markmarkoh/2969317" target="_blank">the following Gist</a></li>
+                    <li><a href="https://bl.ocks.org/d3noob/ddd7129c4486085937eb28da0d22a240" target="_blank">D3 line graph example</a></li>
+                    <li><a href="https://observablehq.com/@sjengle/interactivity-lab" target="_blank">Sophie Engle's interactivity Lab</a> for hover effect</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page footer -->
+    <!-- https://bulma.io/documentation/layout/footer/ -->
+    <footer class="footer">
+        <div class="content has-text-centered is-size-7">
+            <p>
+                <a href="#top">
+                    <span class="fas fa-arrow-up"></span>
+                    <span class="has-text-weight-medium">Back to Top</span>
+                </a>
+            </p>
+
+            <p>
+                <!-- TODO: Change to link to your Github repository -->
+                <a href="https://github.com/usf-cs360-spring2020/midterm-dataviz" target="_blank"
+                    class="button is-small" style="padding-left: 1em; padding-right: 1em;">
+                    <i class="fab fa-github-alt"></i>&nbsp;<strong>Github</strong>
+                </a>
+
+                <a href="https://fontawesome.com/" class="button is-small"
+                    style="padding-left: 1em; padding-right: 1em;">
+                    <i class="fab fa-font-awesome"></i>&nbsp;<strong>FontAwesome</strong>
+                </a>
+
+                <a href="https://bulma.io" class="button is-small">
+                    <img src="https://bulma.io/images/made-with-bulma--semiblack.png" alt="Made with Bulma" width="128"
+                        height="24">
+                </a>
+            </p>
+        </div>
+    </footer>
+    <!-- End page footer -->
+
+    <!-- Mobile menu responsiveness -->
+    <!-- https://bulma.io/documentation/components/navbar/ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            if ($navbarBurgers.length > 0) {
+                $navbarBurgers.forEach(el => {
+                    el.addEventListener('click', () => {
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
+        });
+    </script>
+    <!-- End mobile menu responsiveness -->
+</body>
 
 </html>

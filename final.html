@@ -57,6 +57,7 @@
                         text-anchor: start;
                         font-weight: bold;
                     }
+
                     .line {
                         fill: none;
                         stroke-width: 3;
@@ -76,33 +77,69 @@
                 <!-- include d3-legend: https://d3-legend.susielu.com/ -->
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js"
                     integrity="sha256-qo76Vs9B6JAALbrTn+PcN1r09hbNLd2M78V19glOMeU=" crossorigin="anonymous"></script>
+                <p></p>
 
-               
-
-                <h4>FeedBack </h4>
-               <ul style=“list-style-type:circle”>
-               <li><b>Feedback from peer</b></li>
-               <li>The basemap of World is centered and is a reasonable size. The thickness of country wise boundary is good.
-                The size of the symbols is a little big and they overlap too much. I would suggest to use a bubble to show the intensity of incidents per country.</li>
-               <li>Details given about the coronavirus cases are helpful to understand . But the cases given are only per country rather than per location.</li>
-               <li>Only one color is used to show the coronavirus cases.</li>
-               <li>There's a good amount of data on the map but compared to the size of the svg, I wouldn't say that the data density is very high. The water of the map takes up half of the space.</li>
-              <li><b>feedback from insturctor</b></li>
-              <li>Maybe make map size smaller since the interactivity is main part that will showing my topic</li>
-              <li><b>Changes that I have made</b></li>
-                </ul>
-
-               
                 <h4>Encoding</h4>
                 <p>I chose to use a map, which is the obvious way to show people how bad it is right now. Many maps
                     of the pandemic have been made, but I want to incorporate the best features from each and add
-                    some of my own to tell the most accurate story possible.
-                    <p>Specifically, my map will:</p>
-                    <ul>
-                        <li>Be choropleth map, it displays each country's confirmed cases and deaths shaded on a log
-                            scale</li>
-                        <li>The color will change based on rates per capita</li>
+                    some of my own to tell the most accurate story possible.</p>
 
+
+                <p>The world map encodes each country's confirmed cases and deaths for a particular date, shaded on a
+                    log scale.</p>
+                <p>The graphs below show the new daily cases (averaged over seven days) for each country.</p>
+                <h4>Interactivity: How to use this visualization</h4>
+                <ul>
+                    <li>Move mouse over the graphs at the bottom to move the map's date forward or backwards.</li>
+                    <li>Hover over a country to see total confirmed cases and deaths on that day.</li>
+                    <li>Click on a country to highlight its curve in the graph.</li>
+                </ul>
+
+                <h4>Findings</h4>
+                <ul>
+                    <li>As of May 2020, it is obvious that the war against COVID-19 is not over. The total number
+                        COVID-19 cases worldwide is still increasing very fast and shifting to new hotspots.</li>
+                    <li>In countries that are currently doing the worst, such as Brazil, Russia, and the US,
+                        have done very little politically to respond to the pandemic. They appeared to have slow growth
+                        at the beginning only due to the fact there was little testing, and now they have no choice but
+                        to test more people and have their confirmed cases rise very quickly.</li>
+                    <li>In some of the worst-hit places the number of daily infections has peaked, while other countries
+                        that avoided the first waves are just beginning to tick up.
+                    <li>A few areas such as Taiwan have done especially well at controlling the spread throughout the
+                        whole crisis. Some, like Singapore, kept numbers under control initially but had an outbreak
+                        later that forced it into a more aggressive lockdown. Others, like South Korea, saw one of the
+                        earliest major outbreaks (outside China) but have successfully controlled it since then.
+                    <li>Given that we are also seeing second waves of cases, which means we should be err on the side of
+                        caution when reopening.</li>
+                </ul>
+                <hr />
+                <h4>Peer Feedback</h4>
+                <b>Feedback from peers</b>
+                <ul>
+                    <li>The basemap of World is centered and is a reasonable size. The thickness of country wise
+                        boundary is good.
+                        The size of the symbols is a little big and they overlap too much. I would suggest to use a
+                        bubble to show the intensity of incidents per country.</li>
+                    <li>Details given about the coronavirus cases are helpful to understand . But the cases given are
+                        only per country rather than per location.</li>
+                    <li>Only one color is used to show the coronavirus cases.</li>
+                    <li>There's a good amount of data on the map but compared to the size of the svg, I wouldn't say
+                        that the data density is very high. The water of the map takes up half of the space.</li>
+                </ul>
+
+                <b>Feedback from insturctor</b>
+                <ul>
+                    <li>Maybe make map size smaller since the interactivity is main part that will showing my topic</li>
+                </ul>
+
+                <b>Changes that I have made in response to feedback</b><
+                <ul>
+                    <li>Made the text more legible</li>
+                    <li>Added more interactivity and richer data by allowing different dates to be selected</li>
+                    <li>Shrunk map to make room for plotting time-based cases for all countries below</li>
+                </ul>
+                <!--
+                        <li>The color will change based on rates per capita</li>
                         <li>Encode two dimensions in color:<ul>
                                 <li>Intensity = <i>total</i> cases (or deaths) so far</li>
                                 <li>Hue = percentage <i>daily</i> growth</li>
@@ -112,46 +149,18 @@
                         <li>If possible, resize the countries so that their area is proportional to population.
                             Combined with the above features, this will allow the true scale to be shown while
                             keeping having each country easy to identify by its shape.</li>
+-->
 
-                    </ul>
-
+                <!--
                     <p>Together with the map, there will be a semi-log graph of daily cases vs time, and a log-log
                         plot of daily cases vs total cases which is useful for seeing when a country has exited the
                         exponential growth phase. As with the map, the values on these graphs will be per capita.
                         The next section will detail how they all interact with one another.</p>
+-->
 
-                    <h4>Interactivity</h4>
-                    <p>When a user hovers over a country or the plot for that country:</p>
-                    <ul>
-                        <li>Shows the total number of cases, deaths and country's name in a tooltip</li>
-                        <li>Highlights the country on the map by drawing a boundry around its shape</li>
-                        <li>Highlights the plot for that country in the graphs below.(think of it)</li>
-                    </ul>
+                <!--Finally, have a global toggle to switch between number of cases and number of deaths.-->
 
-                    <p>When a user clicks on a point in the time-based graph:</p>
-                    <ul>
-                        <li>The map is set to reflect the situation on that particular day</li>
-                        <li>All data points in both graphs that are after this time point are faded</li>
-                    </ul>
-                    Finally, have a global toggle to switch between number of cases and number of deaths.
-                    <p></p>
 
-                    <h4>Findings</h4>
-                    <p>When a user hovers over a country or the plot for that country:</p>
-                    <ul>
-                        <li>Shows the total number of cases, deaths and country's name in a tooltip</li>
-                        <li>Highlights the country on the map by drawing a boundry around its shape</li>
-                        <li>Highlights the plot for that country in the graphs below.(think of it)</li>
-                    </ul>
-
-                    <p>When a user clicks on a point in the time-based graph:</p>
-                    <ul>
-                        <li>The map is set to reflect the situation on that particular day</li>
-                        <li>All data points in both graphs that are after this time point are faded</li>
-                    </ul>
-                    Finally, have a global toggle to switch between number of cases and number of deaths.
-
-                    
             </div>
 
             <!-- End page content -->

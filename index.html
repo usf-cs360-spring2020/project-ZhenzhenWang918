@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles.css">
 
-   <!-- TODO: Change title -->
+    <!-- TODO: Change title -->
     <title>Final Project</title>
 
     <!-- Load Bulma from CDN (consider saving it to repository instead) -->
@@ -15,121 +16,128 @@
     <!-- Load Font Awesome 5 (free) icons -->
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  </head>
+</head>
 
-  <body>
+<body>
 
     <div id="nav-placeholder">
     </div>
     <script>
-    $(function(){
-      $("#nav-placeholder").load("nav.html");
-    });
+        $(function () {
+            $("#nav-placeholder").load("nav.html");
+        });
     </script>
     <!---->
     <section class="section">
-      <div class="container">
-        <!-- Begin page content -->
-        <div class="content">
-          <h1 id="home" class="title">
-            <!-- TODO: Change page title -->
-            Topic
-          </h1>
-          
-            <!-- TODO: Change page subtitle -->
-           
-          </p>
+        <div class="container">
+            <!-- Begin page content -->
+            <div class="content">
+                <h1 id="home" class="title">
+                    <!-- TODO: Change page title -->
+                    Topic
+                </h1>
 
-          <p>For my final project topic, I choose to visualize Covid-19 data set. The reason that I choose this because more than 
-            4 million people got affected and more than 283 thousand people dead because of coronavirus, people lost their 
-            loves, daily life changes. I think we should learn our lesson from this epidemic. I will chose to use a map, 
-            which is the obvious way to show people how bad it is right now. Many maps of the pandemic have been made,
-             but I want to incorporate the best features from each and add some of my own to tell the most accurate story possible.
-            </a></p>
+                <!-- TODO: Change page subtitle -->
 
-            <h4>My Questions</h4>
-            <ul style="list-style-type:circle">
-                <li><b>Are we winning the war against COVID-19?</b></li>
-                <li><b>Which countries have been most effective at bringing COVID-19 under control?</b></li>
-                <li><b>When can we start to relax social distincing restrictions?</b></li>
-            </ul>
-          
-            <p>I want to show the situation on a world map so that anyone can get an intuition for where we
-                stand.</p>
+                </p>
 
-            <h4>Answers that I Want to Explore</h4>
-            <p>As of April 2020, the total number COVID-19 cases worldwide is still increasing very fast. In
-                some of the worst-hit places the number of daily infections has peaked, while other countries
-                that avoided the first waves are just beginning to tick up.</p>
+                <p>For my final project topic, I choose to visualize Covid-19 data set. The reason that I choose this
+                    because more than
+                    4 million people got affected and more than 283 thousand people dead because of coronavirus, people
+                    lost their
+                    loves, daily life changes. I think we should learn our lesson from this epidemic. I will chose to
+                    use a map,
+                    which is the obvious way to show people how bad it is right now. Many maps of the pandemic have been
+                    made,
+                    but I want to incorporate the best features from each and add some of my own to tell the most
+                    accurate story possible.
+                    </a></p>
 
-            <p>A few areas such as Taiwan have done especially well at controlling the spread throughout the
-                whole crisis. Some, like Singapore, kept numbers under control initially but had an outbreak
-                later that forced it into a more aggressive lockdown. Others, like South Korea, saw one of the
-                earliest major outbreaks (outside China) but have successfully controlled it since then.</p>
+                <h4>My Questions</h4>
+                <ul style="list-style-type:circle">
+                    <li><b>Are we winning the war against COVID-19?</b></li>
+                    <li><b>Which countries have been most effective at bringing COVID-19 under control?</b></li>
+                    <li><b>When can we start to relax social distincing restrictions?</b></li>
+                </ul>
 
-            <p>Some countries show they had second wave of cases, which means we should be err on the side of
-                caution when reopening. It will also be interesting based on the next month's data to see if
-                allowing back some activities is safe.</p>
+                <p>I want to show the situation on a world map so that anyone can get an intuition for where we
+                    stand.</p>
 
-          <!--
+                <h4>Answers that I Want to Explore</h4>
+                <p>As of April 2020, the total number COVID-19 cases worldwide is still increasing very fast. In
+                    some of the worst-hit places the number of daily infections has peaked, while other countries
+                    that avoided the first waves are just beginning to tick up.</p>
+
+                <p>A few areas such as Taiwan have done especially well at controlling the spread throughout the
+                    whole crisis. Some, like Singapore, kept numbers under control initially but had an outbreak
+                    later that forced it into a more aggressive lockdown. Others, like South Korea, saw one of the
+                    earliest major outbreaks (outside China) but have successfully controlled it since then.</p>
+
+                <p>Some countries show they had second wave of cases, which means we should be err on the side of
+                    caution when reopening. It will also be interesting based on the next month's data to see if
+                    allowing back some activities is safe.</p>
+
+                <!--
           <h1 id="theme">
             Theme
           </h1>
 
           <p>The goal of the visualization is to figure out with respect to the number of incidents - the most active battalion, the most active station and response time for the neighboorhood with most number of incidents.</p>
           -->
+            </div>
+            <!-- End page content -->
         </div>
-      <!-- End page content -->
-    </div>
-  </section>
+    </section>
 
-  <!-- Page footer -->
-  <!-- https://bulma.io/documentation/layout/footer/ -->
-  <footer class="footer">
-    <div class="content has-text-centered is-size-7" >
-      <p>
-        <a href="#top">
-          <span class="fas fa-arrow-up"></span>
-          <span class="has-text-weight-medium">Back to Top</span>
-        </a>
-      </p>
+    <!-- Page footer -->
+    <!-- https://bulma.io/documentation/layout/footer/ -->
+    <footer class="footer">
+        <div class="content has-text-centered is-size-7">
+            <p>
+                <a href="#top">
+                    <span class="fas fa-arrow-up"></span>
+                    <span class="has-text-weight-medium">Back to Top</span>
+                </a>
+            </p>
 
-      <p>
-        <!-- TODO: Change to link to your Github repository -->
-        <a href="https://github.com/usf-cs360-spring2020/midterm-dataviz" target="_blank" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
-          <i class="fab fa-github-alt"></i>&nbsp;<strong>Github</strong>
-        </a>
+            <p>
+                <!-- TODO: Change to link to your Github repository -->
+                <a href="https://github.com/usf-cs360-spring2020/midterm-dataviz" target="_blank"
+                    class="button is-small" style="padding-left: 1em; padding-right: 1em;">
+                    <i class="fab fa-github-alt"></i>&nbsp;<strong>Github</strong>
+                </a>
 
-        <a href="https://fontawesome.com/" class="button is-small" style="padding-left: 1em; padding-right: 1em;">
-          <i class="fab fa-font-awesome"></i>&nbsp;<strong>FontAwesome</strong>
-        </a>
+                <a href="https://fontawesome.com/" class="button is-small"
+                    style="padding-left: 1em; padding-right: 1em;">
+                    <i class="fab fa-font-awesome"></i>&nbsp;<strong>FontAwesome</strong>
+                </a>
 
-        <a href="https://bulma.io" class="button is-small">
-          <img src="https://bulma.io/images/made-with-bulma--semiblack.png" alt="Made with Bulma" width="128" height="24">
-        </a>
-      </p>
-    </div>
-  </footer>
-  <!-- End page footer -->
+                <a href="https://bulma.io" class="button is-small">
+                    <img src="https://bulma.io/images/made-with-bulma--semiblack.png" alt="Made with Bulma" width="128"
+                        height="24">
+                </a>
+            </p>
+        </div>
+    </footer>
+    <!-- End page footer -->
 
-  <!-- Mobile menu responsiveness -->
-  <!-- https://bulma.io/documentation/components/navbar/ -->
-  <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    <!-- Mobile menu responsiveness -->
+    <!-- https://bulma.io/documentation/components/navbar/ -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-    if ($navbarBurgers.length > 0) {
-      $navbarBurgers.forEach( el => {
-        el.addEventListener('click', () => {
-          const target = el.dataset.target;
-          const $target = document.getElementById(target);
-          el.classList.toggle('is-active');
-          $target.classList.toggle('is-active');
+            if ($navbarBurgers.length > 0) {
+                $navbarBurgers.forEach(el => {
+                    el.addEventListener('click', () => {
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+                    });
+                });
+            }
         });
-      });
-    }
-  });
-  </script>
-  <!-- End mobile menu responsiveness -->
-  </body>
-
+    </script>
+    <!-- End mobile menu responsiveness -->
+</body>
